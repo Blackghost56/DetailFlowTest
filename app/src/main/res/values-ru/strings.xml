@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">DetailFlowTest</string>
+    <string name="msg_settings_about">Об устройстве</string>
+    <string name="m_settings_about_serial_number">Серийный номер</string>
+    <string name="msg_settings_firmware_upadte">Обновление прошивки</string>
+    <string name="msg_authorization_enter">Введите пароль</string>
+    <string name="button_authorization_enter">Войти</string>
+    <string name="msg_authorization_hint">Пароль</string>
+    <string name="msg_authorization_incorrect">Неверный пароль</string>
+</resources>
