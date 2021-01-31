@@ -6,7 +6,6 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.appcompat.widget.Toolbar;
 
@@ -16,7 +15,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.detailflowtest.R;
-import com.example.detailflowtest.settings.authentication.AuthorizationFragment;
+import com.example.detailflowtest.settings.authorization.LoginFragment;
 import com.example.detailflowtest.settings.fragment.SettingsStub;
 
 import java.util.List;
@@ -24,7 +23,7 @@ import java.util.List;
 
 public class SettingsItemListActivity extends AppCompatActivity {
 
-
+    private final String TAG = "SettingsItemList";
     private static Context mContext;
 
     /**
@@ -47,22 +46,32 @@ public class SettingsItemListActivity extends AppCompatActivity {
 
         if (findViewById(R.id.item_detail_container) != null) {
             // The detail container view will be present only in the
-            // large-screen layouts (res/values-w900dp).
+            // large-screen layouts (res/values-w700dp).
             // If this view is present, then the
             // activity should be in two-pane mode.
             mTwoPane = true;
 
             // Create view stub
-            if (savedInstanceState == null) {
+            if (getSupportFragmentManager().findFragmentById(R.id.item_detail_container) == null)
                 getSupportFragmentManager().beginTransaction().replace(R.id.item_detail_container, SettingsStub.newInstance()).commit();
-            }
         }
 
         View recyclerView = findViewById(R.id.item_list);
         assert recyclerView != null;
         setupRecyclerView((RecyclerView) recyclerView);
+
+
+//        DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
+//        float dpHeight = displayMetrics.heightPixels / displayMetrics.density;
+//        float dpWidth = displayMetrics.widthPixels / displayMetrics.density;
+//        Log.d(TAG, "dpHeight: " + dpHeight + "\tdpWidth: " + dpWidth);
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+    }
 
     public static Context getAppContext() {
         return mContext;
@@ -84,16 +93,14 @@ public class SettingsItemListActivity extends AppCompatActivity {
                 if (mTwoPane) {
                     // Создание фрагмента из SettingsContent
                     if (item.isPasswordRequired()){
-                        AuthorizationFragment fragment = AuthorizationFragment.newInstance(item.getId());
-                        fragment.registerCallback(new AuthorizationFragment.IAuthorization() {
-                            @Override
-                            public void successfully(int param) {
-                                SettingsContent.ISettingsItem item = SettingsContent.ITEM_MAP.get(param);
-                                if (item != null)
-                                    mParentActivity.getSupportFragmentManager().beginTransaction().replace(R.id.item_detail_container, item.getFragment()).commit();
-                            }
+                        LoginFragment loginFragment = LoginFragment.newInstance(item.getId());
+                        loginFragment.registerCallback(param -> {
+                            SettingsContent.ISettingsItem item1 = SettingsContent.ITEM_MAP.get(param);
+                            if (item1 != null)
+                                mParentActivity.getSupportFragmentManager().beginTransaction().replace(R.id.item_detail_container, item1.getFragment()).commit();
+                            loginFragment.registerCallback(null);
                         });
-                        mParentActivity.getSupportFragmentManager().beginTransaction().replace(R.id.item_detail_container, fragment).commit();
+                        mParentActivity.getSupportFragmentManager().beginTransaction().replace(R.id.item_detail_container, loginFragment).commit();
                     } else {
                         mParentActivity.getSupportFragmentManager().beginTransaction().replace(R.id.item_detail_container, item.getFragment()).commit();
                     }

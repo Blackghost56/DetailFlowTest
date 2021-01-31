@@ -20,7 +20,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.example.detailflowtest.settings.viewmodel.SettingsAboutViewModel" />
+            type="com.example.detailflowtest.settings.viewmodel.AboutViewModel" />
     </data>
 
 <TableLayout

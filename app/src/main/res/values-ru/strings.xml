@@ -6,6 +6,18 @@
     <string name="msg_settings_firmware_upadte">Обновление прошивки</string>
     <string name="msg_authorization_enter">Введите пароль</string>
     <string name="button_authorization_enter">Войти</string>
-    <string name="msg_authorization_hint">Пароль</string>
+    <string name="msg_authorization_hint_password">Пароль</string>
     <string name="msg_authorization_incorrect">Неверный пароль</string>
+    <string name="msg_authorization_change_password">Изменить пароль</string>
+    <string name="msg_authorization_hint_new_password">Новый пароль</string>
+    <string name="button_authorization_change">Изменить</string>
+    <string name="msg_authorization_hint_confirm_password">Подтверждение пароля</string>
+    <string name="msg_authorization_hint_current_password">Текущий пароль</string>
+    <string name="msg_authorization_confirm_incorrect">Подтверждение пароля неверное</string>
+    <string name="msg_authorization_password_empty">Пароль не должен быть пустой</string>
+    <string name="msg_authorization_password_change_successfully">Пароль успешно изменен</string>
+    <string name="msg_firmware_select">Выбрать</string>
+    <string name="msg_firmware_file">Файл</string>
+    <string name="button_firmware_update">Обновить</string>
+    <string name="msg_firmware_update_process">Обновление прошивки</string>
 </resources>

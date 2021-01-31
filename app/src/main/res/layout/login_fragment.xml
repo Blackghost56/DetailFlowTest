@@ -5,18 +5,29 @@
     android:id="@+id/frameLayout2"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".settings.authentication.AuthorizationFragment">
+    tools:context=".settings.authorization.LoginFragment">
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/snackbar_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/textView4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 
     <EditText
-        android:id="@+id/editTextPassword"
+        android:id="@+id/editTextCurrentPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="@string/msg_authorization_hint"
+        android:hint="@string/msg_authorization_hint_password"
         android:inputType="textPassword"
         app:endIconMode="password_toggle"
-        app:layout_constraintBottom_toTopOf="@+id/button_enter_password"
+        app:layout_constraintBottom_toTopOf="@+id/button_change_password"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -30,10 +41,10 @@
         android:alpha=".5"
         android:padding="5dp"
         android:src="@drawable/invisibility"
-        app:layout_constraintBottom_toTopOf="@+id/button_enter_password"
+        app:layout_constraintBottom_toTopOf="@+id/button_change_password"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/editTextPassword"
+        app:layout_constraintStart_toEndOf="@+id/editTextCurrentPassword"
         app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
 
@@ -41,24 +52,26 @@
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="36dp"
+        android:layout_marginTop="40dp"
         android:text="@string/msg_authorization_enter"
         android:textSize="27sp"
-        app:layout_constraintBottom_toTopOf="@+id/editTextPassword"
+        app:layout_constraintBottom_toTopOf="@+id/editTextCurrentPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button_enter_password"
+        android:id="@+id/button_change_password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="40dp"
         android:text="@string/button_authorization_enter"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextPassword"
+        app:layout_constraintTop_toBottomOf="@+id/editTextCurrentPassword"
         app:layout_constraintVertical_bias="0.55" />
 
 

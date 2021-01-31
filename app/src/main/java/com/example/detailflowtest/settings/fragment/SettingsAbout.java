@@ -15,11 +15,11 @@ import android.view.ViewGroup;
 
 import com.example.detailflowtest.R;
 import com.example.detailflowtest.databinding.SettingsAboutBinding;
-import com.example.detailflowtest.settings.viewmodel.SettingsAboutViewModel;
+import com.example.detailflowtest.settings.viewmodel.AboutViewModel;
 
 public class SettingsAbout extends Fragment {
 
-    private SettingsAboutViewModel mViewModel;
+    private AboutViewModel mViewModel;
     private SettingsAboutBinding mBinding;
 
     public static SettingsAbout newInstance() {
@@ -37,7 +37,7 @@ public class SettingsAbout extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = new ViewModelProvider(this).get(SettingsAboutViewModel.class);
+        mViewModel = new ViewModelProvider(this).get(AboutViewModel.class);
         mBinding.setViewModel(mViewModel);
 
         // TODO: Use the ViewModel

@@ -5,7 +5,7 @@ import androidx.databinding.ObservableField;
 import androidx.lifecycle.ViewModel;
 
 
-public class SettingsAboutViewModel extends ViewModel {
+public class AboutViewModel extends ViewModel {
     // TODO: Implement the ViewModel
 
 

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.detailflowtest.R;
+import com.example.detailflowtest.settings.authorization.LoginFragment;
 
 import androidx.appcompat.widget.Toolbar;
 
@@ -44,7 +45,19 @@ public class SettingsItemDetailActivity extends AppCompatActivity {
             if (itemId != -1) {
                 SettingsContent.ISettingsItem item = SettingsContent.ITEM_MAP.get(itemId);
                 getSupportActionBar().setTitle(item.getContent(this));
-                getSupportFragmentManager().beginTransaction().add(R.id.item_detail_container, item.getFragment()).commit();
+//                getSupportFragmentManager().beginTransaction().add(R.id.item_detail_container, item.getFragment()).commit();
+                if (item.isPasswordRequired()){
+                    LoginFragment loginFragment = LoginFragment.newInstance(item.getId());
+                    loginFragment.registerCallback(param -> {
+                        SettingsContent.ISettingsItem item1 = SettingsContent.ITEM_MAP.get(param);
+                        if (item1 != null)
+                            getSupportFragmentManager().beginTransaction().replace(R.id.item_detail_container, item1.getFragment()).commit();
+                        loginFragment.registerCallback(null);
+                    });
+                    getSupportFragmentManager().beginTransaction().replace(R.id.item_detail_container, loginFragment).commit();
+                } else {
+                    getSupportFragmentManager().beginTransaction().replace(R.id.item_detail_container, item.getFragment()).commit();
+                }
             } else {
                 Log.e(TAG, "Incorrect item ID");
                 finish();

@@ -1,4 +1,4 @@
-package com.example.detailflowtest.settings.authentication;
+package com.example.detailflowtest.settings.authorization;
 
 import android.content.SharedPreferences;
 import android.util.Log;
@@ -46,15 +46,23 @@ public class PasswordHolder {
 
 
     public boolean checkPassword(String password){
+        byte[] verifiable = generatePasswordHash(mSalt, password);
+        return mPassword.contains(Arrays.toString(verifiable));
+    }
+
+    public boolean tryUnlock(String password){
         if (mUnlockState && (mMode == VerificationMode.ONCE))
             return true;
 
-        byte[] verifiable = generatePasswordHash(mSalt, password);
-        if (mPassword.contains(Arrays.toString(verifiable))){
+        if (checkPassword(password)){
             mUnlockState = true;
             return true;
         }
         return false;
+    }
+
+    public void lock(){
+        mUnlockState = false;
     }
 
     public boolean isUnlocked(){
@@ -65,10 +73,6 @@ public class PasswordHolder {
                 return false;
         }
         return false;
-    }
-
-    public void block(){
-        mUnlockState = false;
     }
 
     public VerificationMode getVerificationMode(){
@@ -90,6 +94,12 @@ public class PasswordHolder {
         passwordUpdate(DEFAULT_PASSWORD);
     }
 
+    public void passwordUpdate(String newPassword){
+        mPassword = Arrays.toString(generatePasswordHash(mSalt, newPassword));
+        savePassword(mPassword);
+        Log.d(TAG, "passwordUpdate password: " + mPassword);
+    }
+
     private void saltInitialization(){
         if (!loadSalt()){
             mSalt = generateSalt();
@@ -105,12 +115,6 @@ public class PasswordHolder {
             savePassword(mPassword);
         }
         Log.d(TAG, "passwordInitialization password: " + mPassword);
-    }
-
-    private void passwordUpdate(String newPassword){
-        mPassword = Arrays.toString(generatePasswordHash(mSalt, newPassword));
-        savePassword(mPassword);
-        Log.d(TAG, "passwordUpdate password: " + mPassword);
     }
 
     private byte[] generatePasswordHash(byte[] salt, String password){
